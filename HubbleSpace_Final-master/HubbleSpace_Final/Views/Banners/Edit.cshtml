@@ -1,0 +1,43 @@
+﻿@model HubbleSpace_Final.Entities.Banner
+
+@{
+    ViewData["Title"] = "Edit Banner";
+    Layout = "_AdminLayout";
+
+}
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Cập nhật thông tin Banner
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Edit" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID_Banner" />
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="Banner_Name" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input asp-for="Banner_Name" class="form-control" />
+                        <span asp-validation-for="Banner_Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="Photo" class="control-label"></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input asp-for="Photo" class="form-control-file" type="file" />
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group card-footer">
+                    <input type="submit" value="Save" class="btn btn-primary col-2" />
+                    <input type="reset" value="Reset" class="btn btn-danger col-2" />
+                    <a asp-action="Index" class="btn btn-secondary col-2">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

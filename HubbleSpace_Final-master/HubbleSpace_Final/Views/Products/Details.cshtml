@@ -1,0 +1,68 @@
+﻿@model HubbleSpace_Final.Entities.Product
+
+@{
+    ViewData["Title"] = "Details Product";
+    Layout = "_AdminLayout";
+
+}
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Thông tin sản phẩm
+        </div>
+        <div class="card-body card-block">
+            <input type="hidden" asp-for="ID_Product" />
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Product_Name)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Product_Name)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Price_Product)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Price_Product)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Price_Sale)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Price_Sale)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Brand)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Brand.Brand_Name)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.category)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.category.Category_Name)
+                </div>
+            </div>
+
+            <div class="form-group card-footer">
+                <a asp-action="Index" class="btn btn-dark col-2">Back</a>
+                <a asp-action="Edit" class="btn btn-danger col-2" asp-route-id="@Model.ID_Product">Edit</a>
+                <a asp-controller="Color_Product" asp-action="Index" class="btn btn-secondary col-2" asp-route-id="@Model.ID_Product">Color</a>
+            </div>
+        </div>
+    </div>
+</div>

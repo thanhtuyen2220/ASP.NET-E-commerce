@@ -1,0 +1,92 @@
+﻿@model HubbleSpace_Final.Entities.OrderDetail
+
+@{
+    ViewData["Title"] = "Create OrderDetail";
+    Layout = "_AdminLayout";
+
+}
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Thêm chi tiết đơn hàng
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Create" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="ID_Color_Product" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select id="ID_Color_Product" asp-for="ID_Color_Product" class="form-control" asp-items="ViewBag.ID_Color_Product"></select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="Size" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select id="size" asp-for="Size"  class="form-control"></select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="Quantity" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="ID_Order" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <select asp-for="ID_Order" class="form-control" asp-items="ViewBag.ID_Order"></select>
+                    </div>
+                </div>
+
+                <div class="form-group card-footer">
+                    <input type="submit" value="Create" class="btn btn-primary col-2" />
+                    <input type="reset" value="Reset" class="btn btn-danger col-2" />
+                    <a asp-action="Index" class="btn btn-secondary col-2">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section ajax{
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/OrderDetails/GetSize",
+                    data: {
+                        "id": $("#ID_Color_Product").val(),
+                    },
+                    success: function (response) {
+                        $("#size").html(response);
+                    }
+                });
+            });
+            $("#ID_Color_Product").change(function () {
+                $.ajax({
+                    url: "/OrderDetails/GetSize",
+                    data: {
+                        "id": $(this).val(),
+                    },
+                    success: function (response) {
+                        $("#size").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+ }
+

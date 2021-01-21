@@ -1,0 +1,217 @@
+﻿@model IEnumerable<HubbleSpace_Final.Entities.Img_Product>
+
+@{
+    ViewData["Title"] = "Details Page";
+    Layout = "_FrontendLayout";
+
+}
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="~/../Home">Home</a></li>
+                            @{
+                                var breadcrumb_item = Model.FirstOrDefault();
+                                if (breadcrumb_item != null)
+                                {
+                                    <li class="breadcrumb-item"><a asp-action="Categories" asp-route-Object="@breadcrumb_item.color_Product.product.category.Object">@Html.DisplayFor(modelItem => breadcrumb_item.color_Product.product.category.Object)</a></li>
+                                    <li class="breadcrumb-item"><a asp-action="Categories" asp-route-Object="@breadcrumb_item.color_Product.product.category.Object" asp-route-Name="@breadcrumb_item.color_Product.product.category.Category_Name">@Html.DisplayFor(modelItem => breadcrumb_item.color_Product.product.category.Category_Name)</a></li>
+                                    <li aria-current="page" class="breadcrumb-item active">@Html.DisplayFor(modelItem => breadcrumb_item.color_Product.product.Product_Name)</li>
+                                }
+                            }
+                        </ol>
+                    </nav>
+                </div>
+                <!--
+                *** MENUS AND FILTERS ***
+                _________________________________________________________
+                -->
+                <div class="col-lg-3 order-2 order-lg-1">
+
+                    <!--Category -->
+                    <div class="card sidebar-menu mb-4">
+                        <div class="card-header">
+                            <h3 class="h4 card-title">Categories</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-pills flex-column category-menu">
+
+                                <li>
+                                    <a asp-action="Categories" asp-route-Object="Men" class="nav-link">Men</a>
+                                    <ul class="list-unstyled">
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Originals" class="nav-link">Originals</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Running" class="nav-link">Running</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Training" class="nav-link">Training</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Football" class="nav-link">Football</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Basketball" class="nav-link">Basketball</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Men" asp-route-Name="Tennis" class="nav-link">Tennis</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-action="Categories" asp-route-Object="Women" class="nav-link">Women</a>
+                                    <ul class="list-unstyled">
+                                        <li><a asp-action="Categories" asp-route-Object="Women" asp-route-Name="Originals" class="nav-link">Originals</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Women" asp-route-Name="Running" class="nav-link">Running</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Women" asp-route-Name="Training" class="nav-link">Training</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Women" asp-route-Name="Tennis" class="nav-link">Tennis</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-action="Categories" asp-route-Object="Kids" class="nav-link">Kids</a>
+                                    <ul class="list-unstyled">
+                                        <li><a asp-action="Categories" asp-route-Object="Kids" asp-route-Name="Originals" class="nav-link">Originals</a></li>
+                                        <li><a asp-action="Categories" asp-route-Object="Kids" asp-route-Name="Running" class="nav-link">Running</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- *** MENUS AND FILTERS END ***-->
+                <!--ProductMain-->
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div id="productMain" class="row same-height-row">
+                        <div class="col-md-6">
+                            <div>
+                                <div id="main-slider" class="owl-carousel owl-theme">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="item">
+                                            <img src="~/Images/Product_Color_Image/@Html.DisplayFor(modelItem => item.color_Product.product.Product_Name)/@Html.DisplayFor(modelItem => item.Photo)" class="img-fluid owl-height">
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <!--product_color_slider-->
+                            @{var product = Model.FirstOrDefault();
+                                if (product != null)
+                                {
+                                    if (product.color_Product.product.Price_Sale < product.color_Product.product.Price_Product)
+                                    {
+                                        <!-- /.ribbon-->
+                                        <div class="ribbon sale">
+                                            <div class="theribbon">SALE</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                    }
+                                    <!-- /.ribbon-->
+                                    if (product.color_Product.Date > DateTime.Today.AddDays(-1))
+                                    {
+                                        <!-- /.ribbon-->
+                                        <div class="ribbon new">
+                                            <div class="theribbon">NEW</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                        <!-- /.ribbon-->
+                                    }
+                                }
+                            }
+                            <div id="getcolor"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            @if (product != null)
+                            {
+                            <div class="box" style="height: 100%; padding-bottom: 0">
+                                <h2>@Html.DisplayFor(modelItem => product.color_Product.product.Product_Name)</h2>
+                                <h4><i>@Html.DisplayFor(modelItem => product.color_Product.Color_Name)</i></h4>
+                                <p class="price">
+                                    <del>
+                                        @if (product.color_Product.product.Price_Sale < product.color_Product.product.Price_Product)
+                                        {
+                                            <text> @String.Format("{0:0,0}", product.color_Product.product.Price_Product) VNĐ </text>
+                                        }
+                                    </del>
+                                </p>
+                                <p class="price-sale" style="font-size: 1.5rem;">
+                                    <text> @String.Format("{0:0,0}", product.color_Product.product.Price_Sale) VNĐ </text>
+                                </p>
+                                <form asp-controller="Client_ProductCarts" asp-action="AddToCart" method="get">
+                                    <input type="hidden" name="id" value="@product.ID_Color_Product" />
+                                    <input type="hidden" name="name" value="@product.color_Product.product.Product_Name" />
+                                    <input type="hidden" name="price" value="@product.color_Product.product.Price_Sale" />
+                                    <div id="getsize" class="sizes" data-auto-id="@product.ID_Color_Product"></div>
+                                    <p class="text-center buttons">
+                                        <input type="submit" class="btn btn-primary" value="Add to cart" /><!--<i class="fa fa-shopping-cart"></i>-->
+                                    </p>
+                                </form>
+                                
+                                <!-- /.Share in social-->
+                                <div id="details" class="center">
+                                    <h4>Show it to your friends</h4>
+                                    <div class="social">
+                                        <p style="text-align: center"><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+
+
+                    <!-- /.Recommend 4 product-->
+                    <div id="get_recommend_products" class="row same-height-row">
+
+                    </div>
+                </div>
+                <!-- /.col-md-9-->
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var ajax = Model.FirstOrDefault();
+    if (ajax != null)
+    {
+        @section ajax{
+            <script>
+                $(function () {
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: "../GetSize",
+                            data: {
+                                "id": @Model.FirstOrDefault().ID_Color_Product,
+                            },
+                            success: function (response) {
+                                $("#getsize").html(response)
+                            }
+                        });
+                    });
+
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: "../GetColor",
+                            data: {
+                                "id": @Model.FirstOrDefault().color_Product.product.ID_Product,
+                            },
+                            success: function (response) {
+                                $("#getcolor").html(response)
+                            }
+                        });
+                    });
+
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: "../GetRecommendProducts",
+                            data: {
+                                "Object": "@Model.FirstOrDefault().color_Product.product.category.Object.ToString()",
+                                "Name": "@Model.FirstOrDefault().color_Product.product.category.Category_Name.ToString()",
+                                "Brand_Name": "@Model.FirstOrDefault().color_Product.product.Brand.Brand_Name.ToString()",
+                            },
+                            success: function (response) {
+                                $("#get_recommend_products").html(response)
+                            }
+                        });
+                    });
+
+                });
+            </script>
+        }
+    }
+}
+

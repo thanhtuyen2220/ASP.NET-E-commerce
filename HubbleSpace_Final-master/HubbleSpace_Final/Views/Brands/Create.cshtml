@@ -1,0 +1,36 @@
+﻿@model HubbleSpace_Final.Entities.Brand
+
+@{
+    ViewData["Title"] = "Create Brand";
+    Layout = "_AdminLayout";
+
+}
+
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Thêm thương hiệu mới
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Create" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label asp-for="Brand_Name" class="control-label "></label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input asp-for="Brand_Name" class="form-control" />
+                        <span asp-validation-for="Brand_Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group card-footer">
+                    <input type="submit" value="Create" class="btn btn-primary col-2" />
+                    <input type="reset" value="Reset" class="btn btn-danger col-2" />
+                    <a asp-action="Index" class="btn btn-secondary col-2">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

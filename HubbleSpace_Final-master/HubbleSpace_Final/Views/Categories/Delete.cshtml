@@ -1,0 +1,45 @@
+﻿@model HubbleSpace_Final.Entities.Category
+
+@{
+    ViewData["Title"] = "Delete - Category";
+    Layout = "_AdminLayout";
+
+}
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Xóa danh mục <br>
+            Bạn chắc chắn muốn xóa danh mục này?
+        </div>
+        <div class="card-body card-block">
+            <input type="hidden" asp-for="ID_Categorie" />
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Category_Name)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Category_Name)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Object)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Object)
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <div class="form-group card-footer">
+                    <input type="hidden" asp-for="ID_Categorie" />
+                    <input type="submit" value="Delete" class="btn btn-danger col-2" />
+                    <a asp-action="Index" class="btn btn-secondary col-2">Back</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

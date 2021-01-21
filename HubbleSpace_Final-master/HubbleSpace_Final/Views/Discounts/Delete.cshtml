@@ -1,0 +1,63 @@
+﻿@model HubbleSpace_Final.Entities.Discount
+
+@{
+    ViewData["Title"] = "Delete - Discount";
+    Layout = "_AdminLayout";
+
+}
+
+<div class="row">
+    <div class="card card-body">
+        <div class="card-header title--sbold">
+            Xóa khuyến mãi <br>
+            Bạn chắc chắn muốn xóa khuyến mãi này?
+        </div>
+        <div class="card-body card-block">
+            <input type="hidden" asp-for="ID_Discount" />
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Code_Discount)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Code_Discount)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Expire)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Expire)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.Value)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.Value)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    @Html.DisplayNameFor(model => model.NumberofTurns)
+                </div>
+                <div class="col-12 col-md-9">
+                    @Html.DisplayFor(model => model.NumberofTurns)
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <div class="form-group card-footer">
+                    <input type="hidden" asp-for="ID_Discount" />
+                    <input type="submit" value="Delete" class="btn btn-danger col-2" />
+                    <a asp-action="Index" class="btn btn-secondary col-2">Back</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

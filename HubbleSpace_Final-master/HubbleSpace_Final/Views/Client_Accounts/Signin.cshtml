@@ -1,0 +1,48 @@
+﻿@model HubbleSpace_Final.Models.SignInModel
+
+@{
+    ViewData["Title"] = "Sign in";
+    Layout = "_FrontendLayout";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- breadcrumb-->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/../Home">Home</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">Sign in</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-12">
+            <div class="box">
+                <h1>Sign in</h1>
+                <hr>
+                <form asp-action="Signin">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
+                        </label>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Sign in</button>
+                        <p><a asp-action="ForgotPassword" asp-controller="Client_Accounts">Forgot password?</a></p>
+                        <p>Click <a asp-action="SignUp" asp-controller="Client_Accounts">here</a> to Sign Up</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
